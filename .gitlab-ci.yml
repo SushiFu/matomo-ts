@@ -1,0 +1,54 @@
+image: "node:lts"
+
+stages:
+  - install
+  - lint
+  - build
+  - release
+
+variables:
+  TAG: latest
+
+before_script:
+  - 'echo -e "registry=https://registry.npmjs.org/" > .npmrc'
+  - 'echo -e "always-auth=true" >> .npmrc'
+  - 'echo -e "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> .npmrc'
+
+lint:
+  stage: lint
+  script:
+    - yarn install
+    - yarn lint
+  cache:
+    key: "${CI_PROJECT_ID}"
+    paths:
+      - node_modules/
+  when: on_success
+  only:
+    - tags
+
+build:
+  stage: build
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    name: "${CI_PIPELINE_ID}"
+    paths:
+      - _bundles
+      - lib
+      - lib-esm
+      - types
+  when: on_success
+  only:
+    - tags
+
+release:
+  stage: release
+  retry: 1
+  script:
+    - npm version --no-git-tag-version $CI_COMMIT_TAG
+    - npm publish
+  only:
+    - tags
+  when: on_success

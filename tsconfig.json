@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "target": "es5",
+        "lib": ["es2015", "dom"],
+        "removeComments": false,
+        "outDir": "lib",
+        "declaration": true,
+        "declarationDir": "types",
+        "importHelpers": true,
+        "sourceMap": true,
+        "listFiles": false,
+        "traceResolution": false,
+        "pretty": true,
+        "baseUrl": ".",
+        "paths": {
+            "matomo-ts": ["src/index.ts"]
+        }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
