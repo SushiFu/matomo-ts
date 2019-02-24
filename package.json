@@ -1,6 +1,6 @@
 {
     "name": "matomo-ts",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "./_bundles/matomo-ts.js",
     "license": "MIT",
     "types": "./types/index.d.ts",
