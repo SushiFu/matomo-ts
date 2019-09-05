@@ -78,7 +78,9 @@ export default class Matomo {
     }
 
     public push(args: any[]): void {
-        window._paq.push(args);
+        if (window._paq) { 
+            window._paq.push(args);
+        }
     }
 
     public setUserId(userId: string): void {
